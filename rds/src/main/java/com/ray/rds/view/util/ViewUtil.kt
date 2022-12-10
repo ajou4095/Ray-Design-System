@@ -1,4 +1,4 @@
-package com.ray.rds.common.util
+package com.ray.rds.view.util
 
 import android.content.Context
 import android.content.res.Resources

@@ -10,6 +10,8 @@
     <dimen name="spacing_xl">30dp</dimen>
     <dimen name="spacing_xxl">35dp</dimen>
 
+    <dimen name="radius_main">10dp</dimen>
+
     <dimen name="typography_headline1">96dp</dimen>
     <dimen name="typography_headline2">60dp</dimen>
     <dimen name="typography_headline3">48dp</dimen>

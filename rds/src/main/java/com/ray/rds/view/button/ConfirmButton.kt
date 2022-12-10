@@ -1,46 +1,99 @@
 package com.ray.rds.view.button
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
-import android.view.Gravity
-import androidx.appcompat.widget.AppCompatButton
-import androidx.core.view.setPadding
+import android.view.LayoutInflater
+import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
+import com.ray.rds.ColorType
 import com.ray.rds.R
-import com.ray.rds.view.util.bindingadapter.setOnIntervalClick
+import com.ray.rds.databinding.ViewConfirmButtonBinding
+import com.ray.rds.view.util.dp
+import com.ray.rds.view.util.getBoolean
+import com.ray.rds.view.util.getInteger
+import com.ray.rds.view.util.getString
 
-/**
- * 사용법
- * style="Typography.ConfirmButton.Blue" 와 같이 스타일을 지정해 색을 설정한다.
- *
- * attribute
- * onIntervalClick : 딜레이를 넣어 다중 클릭을 방지한다.
- */
 class ConfirmButton @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = R.attr.typographyButton
-) : AppCompatButton(context, attributeSet, defStyle) {
+    defStyle: Int = 0
+) : CardView(context, attributeSet, defStyle) {
+    private val binding = ViewConfirmButtonBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var onIntervalClick: OnClickListener? = null
+    var text: CharSequence? = null
+        get() = binding.content.text
         set(value) {
             field = value
-            setOnIntervalClick(field)
+            binding.content.text = field
+        }
+
+    var mainColorType: ColorType? = null
+        set(value) {
+            field = value
+            refreshColor()
+        }
+
+    var priority: ConfirmButtonPriority? = null
+        set(value) {
+            field = value
+            refreshColor()
+        }
+
+    var isLoading: Boolean? = null
+        set(value) {
+            field = value
+            binding.loading.isVisible = isLoading == true
+            binding.content.isVisible = isLoading != true
         }
 
     init {
-        elevation = 0f
-        gravity = Gravity.CENTER
-
-        minWidth = 0
-        minHeight = 0
-        minimumWidth = 0
-        minimumHeight = 0
-
+        context.obtainStyledAttributes(attributeSet, R.styleable.ConfirmButton).use { attributes ->
+            attributes.getString(R.styleable.ConfirmButton_android_text) { text ->
+                this.text = text
+            }
+            attributes.getInteger(R.styleable.ConfirmButton_mainColorType) { index ->
+                this.mainColorType = ColorType.getColorTypeByIndex(index)
+            }
+            attributes.getInteger(R.styleable.ConfirmButton_priority) { index ->
+                this.priority = ConfirmButtonPriority.getPriorityByIndex(index)
+            }
+            attributes.getBoolean(R.styleable.ConfirmButton_isLoading) { isLoading ->
+                this.isLoading = isLoading
+            }
+        }
+        radius = resources.getDimension(R.dimen.radius_main)
+        cardElevation = 0f
         isClickable = true
-        isEnabled = true
-        isAllCaps = false
-        stateListAnimator = null
+        isFocusable = true
+    }
 
-        setPadding(resources.getDimension(R.dimen.spacing_s).toInt())
+    private fun refreshColor() {
+        val mainColorType = mainColorType ?: return
+        val priority = priority ?: return
+
+        when (priority) {
+            ConfirmButtonPriority.Main -> {
+                setCardBackgroundColor(mainColorType.colorSet.variant700)
+                binding.content.setTextColor(Color.WHITE)
+            }
+
+            ConfirmButtonPriority.Sub -> {
+                setCardBackgroundColor(mainColorType.colorSet.variant50)
+                binding.content.setTextColor(mainColorType.colorSet.variant900)
+            }
+        }
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.EXACTLY) {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        } else {
+            super.onMeasure(
+                widthMeasureSpec,
+                MeasureSpec.makeMeasureSpec(50.dp.toInt(), MeasureSpec.EXACTLY)
+            )
+        }
     }
 }
+
