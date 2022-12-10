@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+    namespace = "com.ray.rds.common"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
@@ -26,9 +27,6 @@ android {
 dependencies {
     implementation(libs.bundles.kotlin)
     implementation(libs.bundles.androidx.presentation)
-    implementation(libs.google.material)
-    implementation(libs.glide)
-    kapt(libs.glide.compiler)
 
     implementation(libs.timber)
 }

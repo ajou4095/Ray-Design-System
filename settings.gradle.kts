@@ -16,9 +16,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "template"
+rootProject.name = "RDS"
 include(":app")
 include(":common")
-include(":presentation")
-include(":domain")
-include(":data")
+include(":rds")
