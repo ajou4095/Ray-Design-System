@@ -6,6 +6,33 @@ plugins {
     kotlin("plugin.parcelize")
     kotlin("android")
     kotlin("kapt")
+    `maven-publish`
+}
+
+val userName = getLocalProperty("gpr.usr")
+val userKey = getLocalProperty("gpr.key")
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/ajou4095/Ray-Design-System")
+            credentials {
+                username = userName
+                password = userKey
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("gpr") {
+            run {
+                groupId = "io.github.rayjang"
+                artifactId = "rds"
+                version = libs.versions.app.versionname.get()
+                artifact("$buildDir/outputs/aar/${project.name}-${libs.versions.app.versionname.get()}-release.aar")
+            }
+        }
+    }
 }
 
 android {
