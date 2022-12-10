@@ -40,6 +40,15 @@ android {
         viewBinding = true
         dataBinding = true
     }
+    libraryVariants.all {
+        val variant = this
+        variant.outputs.map {
+            it as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+        }.forEach { output ->
+            val outputFileName = "${project.name}-${libs.versions.app.versionname.get()}-${variant.name}.aar"
+            output.outputFileName = outputFileName
+        }
+    }
 }
 
 dependencies {
