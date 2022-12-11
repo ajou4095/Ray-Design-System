@@ -8,6 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import com.ray.rds.R
 import com.ray.rds.view.util.getDisplayWidth
+import com.ray.rds.window.loading.LoadingDialogFragmentProvider
 
 abstract class BaseDialogFragment<B : ViewDataBinding>(
     private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
@@ -17,9 +18,7 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
     protected val binding
         get() = _binding!!
 
-    var onCancel: (() -> Unit)? = null
-
-    var onConfirm: (() -> Any)? = null
+    private var loadingDialog: DialogFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,6 +62,32 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
             && !this@BaseDialogFragment.childFragmentManager.isStateSaved
         ) {
             show(this@BaseDialogFragment.childFragmentManager, javaClass.simpleName)
+        }
+    }
+
+    protected fun showLoading() {
+        if (
+            this@BaseDialogFragment.activity?.isFinishing == false
+            && this@BaseDialogFragment.activity?.isDestroyed == false
+            && !this@BaseDialogFragment.parentFragmentManager.isDestroyed
+            && !this@BaseDialogFragment.parentFragmentManager.isStateSaved
+            && loadingDialog == null
+        ) {
+            loadingDialog = LoadingDialogFragmentProvider.makeLoadingDialog()
+            loadingDialog?.show()
+        }
+    }
+
+    protected fun hideDialog() {
+        if (
+            this@BaseDialogFragment.activity?.isFinishing == false
+            && this@BaseDialogFragment.activity?.isDestroyed == false
+            && loadingDialog?.parentFragmentManager?.isDestroyed == false
+            && loadingDialog?.parentFragmentManager?.isStateSaved == false
+            && loadingDialog != null
+        ) {
+            loadingDialog?.dismiss()
+            loadingDialog = null
         }
     }
 

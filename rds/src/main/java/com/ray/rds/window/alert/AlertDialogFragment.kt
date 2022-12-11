@@ -3,12 +3,12 @@ package com.ray.rds.window.alert
 import android.content.DialogInterface
 import androidx.fragment.app.viewModels
 import com.ray.rds.common.eventObserve
-import com.ray.rds.databinding.ViewAlertDialogBinding
+import com.ray.rds.databinding.DialogAlertBinding
 import com.ray.rds.window.base.BaseDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-internal class AlertDialogFragment : BaseDialogFragment<ViewAlertDialogBinding>(ViewAlertDialogBinding::inflate) {
+internal class AlertDialogFragment : BaseDialogFragment<DialogAlertBinding>(DialogAlertBinding::inflate) {
     private val viewModel: AlertDialogViewModel by viewModels()
 
     var onCancel: (() -> Unit)? = null
