@@ -1,12 +1,13 @@
 package com.ray.rds.window.alert
 
 import android.os.Bundle
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.SavedStateHandle
 import com.ray.rds.common.getBooleanOrDefault
 import com.ray.rds.common.getBundle
 import com.ray.rds.common.getStringOrDefault
 
-object AlertDialogFragmentHelper {
+object AlertDialogFragmentProvider {
     private const val BUNDLE = "key_BUNDLE"
     private const val TITLE = "key_TITLE"
     private const val MESSAGE = "key_MESSAGE"
@@ -14,15 +15,16 @@ object AlertDialogFragmentHelper {
     private const val CANCEL_MESSAGE = "key_CANCEL_MESSAGE"
     private const val CONFIRM_MESSAGE = "key_CONFIRM_MESSAGE"
 
-    internal fun newInstance(
+    fun makeAlertDialog(
         title: String? = null,
         message: String? = null,
         isTwoButton: Boolean = false,
         cancelMessage: String? = AlertDialogFragmentContract.STRING_CANCEL,
         confirmMessage: String? = AlertDialogFragmentContract.STRING_CONFIRM,
         onCancel: (() -> Unit)? = null,
-        onConfirm: (() -> Any)? = null
-    ): AlertDialogFragment {
+        onConfirm: (() -> Unit)? = null,
+        onDismiss: (() -> Unit)? = null
+    ): DialogFragment {
         val args = Bundle().apply {
             putString(TITLE, title)
             putString(MESSAGE, message)
@@ -34,33 +36,35 @@ object AlertDialogFragmentHelper {
             arguments = Bundle().also {
                 it.putBundle(BUNDLE, args)
             }
+            // TODO : SavedState Bundle 에 저장되지 않아 상태 저장할 때 유실되는 문제 해결하기. viewModel 에 Listener 저장?
             this.onCancel = onCancel
             this.onConfirm = onConfirm
+            this.onDismiss = onDismiss
         }
         return fragment
     }
 
-    fun getBundle(savedStateHandle: SavedStateHandle): Bundle? {
+    internal fun getBundle(savedStateHandle: SavedStateHandle): Bundle? {
         return savedStateHandle.getBundle(BUNDLE)
     }
 
-    fun getTitle(bundle: Bundle?): String {
+    internal fun getTitle(bundle: Bundle?): String {
         return bundle.getStringOrDefault(TITLE)
     }
 
-    fun getMessage(bundle: Bundle?): String {
+    internal fun getMessage(bundle: Bundle?): String {
         return bundle.getStringOrDefault(MESSAGE)
     }
 
-    fun isTwoButton(bundle: Bundle?): Boolean {
+    internal fun isTwoButton(bundle: Bundle?): Boolean {
         return bundle.getBooleanOrDefault(IS_TWO_BUTTON)
     }
 
-    fun getCancelMessage(bundle: Bundle?): String {
+    internal fun getCancelMessage(bundle: Bundle?): String {
         return bundle.getStringOrDefault(CANCEL_MESSAGE)
     }
 
-    fun getConfirmMessage(bundle: Bundle?): String {
+    internal fun getConfirmMessage(bundle: Bundle?): String {
         return bundle.getStringOrDefault(CONFIRM_MESSAGE)
     }
 }

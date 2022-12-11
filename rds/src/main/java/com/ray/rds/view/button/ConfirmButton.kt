@@ -82,8 +82,8 @@ class ConfirmButton @JvmOverloads constructor(
                 )
 
                 val colors = intArrayOf(
-                    mainColorType.colorSet.variant300,
-                    mainColorType.colorSet.variant100
+                    mainColorType.colorSet.variant700,
+                    mainColorType.colorSet.variant300
                 )
 
                 setCardBackgroundColor(ColorStateList(states, colors))

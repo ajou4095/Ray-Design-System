@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 abstract class BaseBottomSheet<B : ViewDataBinding>(
@@ -37,6 +38,17 @@ abstract class BaseBottomSheet<B : ViewDataBinding>(
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun DialogFragment.show() {
+        if (
+            this@BaseBottomSheet.activity?.isFinishing == false
+            && this@BaseBottomSheet.activity?.isDestroyed == false
+            && !this@BaseBottomSheet.childFragmentManager.isDestroyed
+            && !this@BaseBottomSheet.childFragmentManager.isStateSaved
+        ) {
+            show(this@BaseBottomSheet.childFragmentManager, javaClass.simpleName)
+        }
     }
 
     protected fun bind(action: B.() -> Unit) {

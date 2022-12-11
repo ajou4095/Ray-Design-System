@@ -55,6 +55,17 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
         _binding = null
     }
 
+    fun DialogFragment.show() {
+        if (
+            this@BaseDialogFragment.activity?.isFinishing == false
+            && this@BaseDialogFragment.activity?.isDestroyed == false
+            && !this@BaseDialogFragment.childFragmentManager.isDestroyed
+            && !this@BaseDialogFragment.childFragmentManager.isStateSaved
+        ) {
+            show(this@BaseDialogFragment.childFragmentManager, javaClass.simpleName)
+        }
+    }
+
     protected fun bind(action: B.() -> Unit) {
         binding.action()
     }

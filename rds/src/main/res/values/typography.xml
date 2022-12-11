@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- TODO : Transparent Status Bar Color -->
     <style name="Typography" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -21,7 +22,6 @@
         <item name="typographySubtitle2">@style/Typography.TextAppearance.Subtitle2</item>
         <item name="typographyBody1">@style/Typography.TextAppearance.Body1</item>
         <item name="typographyBody2">@style/Typography.TextAppearance.Body2</item>
-        <item name="typographyButton">@style/Typography.TextAppearance.Button</item>
 
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -92,10 +92,5 @@
     <style name="Typography.TextAppearance.Body2" parent="Typography.TextAppearance.Regular">
         <item name="android:textSize">@dimen/typography_body2</item>
         <item name="android:lineSpacingExtra">0.25dp</item>
-    </style>
-
-    <style name="Typography.TextAppearance.Button" parent="Typography.TextAppearance.Medium">
-        <item name="android:textSize">@dimen/typography_button</item>
-        <item name="android:lineSpacingExtra">1.25dp</item>
     </style>
 </resources>

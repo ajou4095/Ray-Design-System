@@ -12,14 +12,11 @@ import com.ray.rds.view.util.getDisplayWidth
 internal abstract class BaseDialogFragment<B : ViewDataBinding>(
     private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
 ) : DialogFragment() {
+
     private var _binding: B? = null
 
     protected val binding
         get() = _binding!!
-
-    var onCancel: (() -> Unit)? = null
-
-    var onConfirm: (() -> Any)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +50,17 @@ internal abstract class BaseDialogFragment<B : ViewDataBinding>(
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun DialogFragment.show() {
+        if (
+            this@BaseDialogFragment.activity?.isFinishing == false
+            && this@BaseDialogFragment.activity?.isDestroyed == false
+            && !this@BaseDialogFragment.childFragmentManager.isDestroyed
+            && !this@BaseDialogFragment.childFragmentManager.isStateSaved
+        ) {
+            show(this@BaseDialogFragment.childFragmentManager, javaClass.simpleName)
+        }
     }
 
     protected fun bind(action: B.() -> Unit) {

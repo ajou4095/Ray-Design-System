@@ -14,7 +14,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_xs">
+        android:layout_margin="@dimen/spacing_xs"
+        android:theme="@style/Typography">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
@@ -24,7 +25,7 @@
             android:layout_marginBottom="@dimen/spacing_xs"
             android:gravity="center"
             android:text="@{vm.title}"
-            android:textAppearance="?attr/typographyHeadline5"
+            android:textAppearance="?attr/typographyHeadline6"
             app:layout_constraintBottom_toTopOf="@id/message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,17 +40,16 @@
             android:layout_marginBottom="@dimen/spacing_xs"
             android:gravity="center"
             android:text="@{vm.message}"
-            android:textAppearance="?attr/typographyBody1"
+            android:textAppearance="?attr/typographySubtitle2"
             app:layout_constraintBottom_toTopOf="@id/confirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
             app:visibleOrGone="@{vm.message}"
-            tools:text="문제가 있습니다. \n 재시도 해주세요." />
+            tools:text="문제가 있습니다.\n 재시도 해주세요." />
 
         <com.ray.rds.view.button.ConfirmButton
             android:id="@+id/cancel"
-            style="@style/Typography.ConfirmButton.BlueGray"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_xs"
@@ -58,12 +58,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/confirm"
             app:layout_constraintStart_toStartOf="parent"
+            app:mainColorType="gray"
+            app:priority="sub"
             app:visibleOrGone="@{vm.isTwoButton}"
             tools:text="닫기" />
 
         <com.ray.rds.view.button.ConfirmButton
             android:id="@+id/confirm"
-            style="@style/Typography.ConfirmButton.Blue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_xs"
@@ -73,6 +74,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/cancel"
             app:layout_constraintTop_toBottomOf="@id/message"
+            app:priority="main"
+            tools:mainColorType="blue"
             tools:text="확인" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

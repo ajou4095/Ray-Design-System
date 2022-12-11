@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Button -->
-    <style name="Typography.ConfirmButton" parent="Typography.TextAppearance.Button" />
+    <!-- region View -->
 
-    <style name="Typography.ConfirmButton.Blue">
-        <item name="android:background">@drawable/bg_confirm_button_blue</item>
-        <item name="android:textColor">@color/blue_gray_50</item>
+    <!-- endregion View -->
+
+    <!-- region Window -->
+    <style name="Typography.BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowAnimationStyle">@style/Typography.Animation.BottomSheetDialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.4</item>
+        <item name="bottomSheetStyle">@style/Typography.BottomSheetModal</item>
     </style>
 
-    <style name="Typography.ConfirmButton.BlueGray">
-        <item name="android:background">@drawable/bg_confirm_button_blue_gray</item>
-        <item name="android:textColor">@color/blue_gray_900</item>
+    <style name="Typography.BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottomsheet</item>
     </style>
+    <!-- endregion Window -->
+
+    <!-- region Animation -->
+    <style name="Typography.Animation" parent="@android:style/Animation" />
+    <!-- TODO -->
+    <style name="Typography.Animation.BottomSheetDialog" />
+    <!-- endregion Animation -->
 </resources>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 
 abstract class BaseFragment<B : ViewDataBinding>(
@@ -37,6 +38,17 @@ abstract class BaseFragment<B : ViewDataBinding>(
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun DialogFragment.show() {
+        if (
+            this@BaseFragment.activity?.isFinishing == false
+            && this@BaseFragment.activity?.isDestroyed == false
+            && !this@BaseFragment.childFragmentManager.isDestroyed
+            && !this@BaseFragment.childFragmentManager.isStateSaved
+        ) {
+            show(this@BaseFragment.childFragmentManager, javaClass.simpleName)
+        }
     }
 
     protected fun bind(action: B.() -> Unit) {

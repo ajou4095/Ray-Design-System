@@ -10,35 +10,35 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AlertDialogViewModel @Inject constructor(
+internal class AlertDialogViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     val bundle: Bundle? by lazy {
-        AlertDialogFragmentHelper.getBundle(savedStateHandle)
+        AlertDialogFragmentProvider.getBundle(savedStateHandle)
     }
 
     val title: String by lazy {
-        AlertDialogFragmentHelper.getTitle(bundle)
+        AlertDialogFragmentProvider.getTitle(bundle)
     }
 
     val message: String by lazy {
-        AlertDialogFragmentHelper.getMessage(bundle)
+        AlertDialogFragmentProvider.getMessage(bundle)
     }
 
     val isTwoButton: Boolean by lazy {
-        AlertDialogFragmentHelper.isTwoButton(bundle)
+        AlertDialogFragmentProvider.isTwoButton(bundle)
     }
 
     val cancelMessage: String by lazy {
-        AlertDialogFragmentHelper.getCancelMessage(bundle)
+        AlertDialogFragmentProvider.getCancelMessage(bundle)
     }
 
     val confirmMessage: String by lazy {
-        AlertDialogFragmentHelper.getConfirmMessage(bundle)
+        AlertDialogFragmentProvider.getConfirmMessage(bundle)
     }
 
     private val _event = MutableLiveData<Event<AlertDialogViewEvent>>()
-    internal val event: LiveData<Event<AlertDialogViewEvent>>
+    val event: LiveData<Event<AlertDialogViewEvent>>
         get() = _event
 
     fun onCancel() {
