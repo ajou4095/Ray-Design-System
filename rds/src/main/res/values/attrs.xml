@@ -41,6 +41,6 @@
             <enum name="main" value="0" />
             <enum name="sub" value="1" />
         </attr>
-        <attr name="isLoading" format="boolean" />
+        <attr name="loading" format="boolean" />
     </declare-styleable>
 </resources>
