@@ -36,7 +36,8 @@ object AlertDialogFragmentProvider {
             arguments = Bundle().also {
                 it.putBundle(BUNDLE, args)
             }
-            // TODO : SavedState Bundle 에 저장되지 않아 상태 저장할 때 유실되는 문제 해결하기. viewModel 에 Listener 저장?
+            // TODO : SavedState Bundle 에 저장되지 않아 상태 저장할 때 유실되는 문제 해결하기.
+            /** @see androidx.fragment.app.setFragmentResult **/
             this.onCancel = onCancel
             this.onConfirm = onConfirm
             this.onDismiss = onDismiss

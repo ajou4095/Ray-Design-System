@@ -6,7 +6,8 @@
     <merge
         tools:layout_height="50dp"
         tools:layout_width="match_parent"
-        tools:parentTag="androidx.cardview.widget.CardView">
+        tools:parentTag="androidx.cardview.widget.CardView"
+        tools:theme="@style/Typography">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

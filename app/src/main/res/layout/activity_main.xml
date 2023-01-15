@@ -16,6 +16,20 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
+        <com.ray.rds.view.group.segment.SegmentControl
+            android:id="@+id/segment_control"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onItemClick="@{(position)->vm.onSegmentControlClick(position)}"
+            app:position="@={vm.segmentPosition}"
+            app:segments="@{vm.segments}"
+            tools:segments="@array/segment_control_items"
+            tools:position="1" />
+
         <com.ray.rds.view.button.ConfirmButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"

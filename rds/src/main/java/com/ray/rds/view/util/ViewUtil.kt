@@ -1,13 +1,16 @@
 package com.ray.rds.view.util
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.content.res.TypedArray
 import android.util.TypedValue
+import androidx.annotation.IntegerRes
 import androidx.annotation.StyleableRes
 import androidx.core.content.res.getBooleanOrThrow
 import androidx.core.content.res.getFloatOrThrow
 import androidx.core.content.res.getIntegerOrThrow
+import androidx.core.content.res.getResourceIdOrThrow
 import androidx.core.content.res.getStringOrThrow
 import androidx.core.content.res.getTextOrThrow
 import androidx.databinding.ViewDataBinding
@@ -121,3 +124,37 @@ inline fun TypedArray.getLong(
         onSuccess(it.toLong())
     }
 }
+
+inline fun TypedArray.getResourceId(
+    @StyleableRes index: Int,
+    onSuccess: (Int) -> Unit
+) {
+    if (hasValue(index)) {
+        val value = getResourceIdOrThrow(index)
+        onSuccess(value)
+    }
+}
+
+inline fun TypedArray.getResourceId(
+    @StyleableRes index: Int,
+    onFailure: () -> Unit,
+    onSuccess: (Int) -> Unit
+) {
+    if (hasValue(index)) {
+        val value = getResourceIdOrThrow(index)
+        onSuccess(value)
+    } else {
+        onFailure()
+    }
+}
+
+fun Resources.getLong(
+    @IntegerRes id: Int
+): Long {
+    return getInteger(id).toLong()
+}
+
+fun makeColorStateList(vararg colorStateList: Pair<IntArray, Int>) = ColorStateList(
+    colorStateList.map { it.first }.toTypedArray(),
+    colorStateList.map { it.second }.toTypedArray().toIntArray()
+)
