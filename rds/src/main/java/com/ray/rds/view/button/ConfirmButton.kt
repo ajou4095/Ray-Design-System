@@ -10,10 +10,10 @@ import androidx.core.view.isVisible
 import com.ray.rds.ColorType
 import com.ray.rds.R
 import com.ray.rds.databinding.ViewConfirmButtonBinding
-import com.ray.rds.view.util.dp
-import com.ray.rds.view.util.getBoolean
-import com.ray.rds.view.util.getInteger
-import com.ray.rds.view.util.getString
+import com.ray.rds.util.dp
+import com.ray.rds.util.getBoolean
+import com.ray.rds.util.getInteger
+import com.ray.rds.util.getString
 
 class ConfirmButton @JvmOverloads constructor(
     context: Context,

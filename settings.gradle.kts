@@ -13,10 +13,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven(url = "https://jitpack.io")
     }
 }
 
 rootProject.name = "RDS"
 include(":app")
-include(":common")
 include(":rds")

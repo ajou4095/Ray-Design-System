@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import com.ray.rds.R
-import com.ray.rds.view.util.getDisplayWidth
+import com.ray.rds.util.getDisplayWidth
 import com.ray.rds.window.loading.LoadingDialogFragmentProvider
 
 abstract class BaseDialogFragment<B : ViewDataBinding>(
@@ -78,7 +78,7 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
         }
     }
 
-    protected fun hideDialog() {
+    protected fun hideLoading() {
         if (
             this@BaseDialogFragment.activity?.isFinishing == false
             && this@BaseDialogFragment.activity?.isDestroyed == false

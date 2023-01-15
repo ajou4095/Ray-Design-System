@@ -52,7 +52,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
     implementation(project(":rds"))
 
     implementation(libs.bundles.kotlin)

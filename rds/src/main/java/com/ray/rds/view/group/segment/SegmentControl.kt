@@ -18,12 +18,12 @@ import androidx.databinding.InverseBindingMethods
 import com.ray.rds.ColorType
 import com.ray.rds.OnItemClickListener
 import com.ray.rds.R
-import com.ray.rds.common.orZero
+import com.ray.rds.common.util.orZero
 import com.ray.rds.databinding.ViewSegmentChildBinding
 import com.ray.rds.databinding.ViewSegmentGroupBinding
-import com.ray.rds.view.util.getLong
-import com.ray.rds.view.util.getResourceId
-import com.ray.rds.view.util.makeColorStateList
+import com.ray.rds.util.getLong
+import com.ray.rds.util.getResourceId
+import com.ray.rds.util.makeColorStateList
 
 
 @BindingAdapter("positionAttrChanged")

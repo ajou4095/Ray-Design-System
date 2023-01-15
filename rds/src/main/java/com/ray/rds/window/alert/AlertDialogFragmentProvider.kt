@@ -3,9 +3,9 @@ package com.ray.rds.window.alert
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.SavedStateHandle
-import com.ray.rds.common.getBooleanOrDefault
-import com.ray.rds.common.getBundle
-import com.ray.rds.common.getStringOrDefault
+import com.ray.rds.common.util.getBooleanOrDefault
+import com.ray.rds.common.util.getBundle
+import com.ray.rds.common.util.getStringOrDefault
 
 object AlertDialogFragmentProvider {
     private const val BUNDLE = "key_BUNDLE"

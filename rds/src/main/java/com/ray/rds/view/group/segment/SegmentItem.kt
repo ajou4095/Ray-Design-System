@@ -8,8 +8,8 @@ import android.util.AttributeSet
 import android.view.View
 import com.ray.rds.ColorType
 import com.ray.rds.R
-import com.ray.rds.common.orZero
-import com.ray.rds.view.util.dp
+import com.ray.rds.common.util.orZero
+import com.ray.rds.util.dp
 
 internal class SegmentItem @JvmOverloads constructor(
     context: Context,

@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.fragment.app.viewModels
 import com.ray.rds.databinding.DialogLoadingBinding
-import com.ray.rds.window.base.BaseDialogFragment
+import com.ray.rds.common.base.BaseDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

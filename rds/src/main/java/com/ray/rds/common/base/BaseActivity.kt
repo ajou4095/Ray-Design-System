@@ -1,4 +1,4 @@
-package com.ray.rds.sample.ui.common.base
+package com.ray.rds.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import com.ray.rds.window.loading.LoadingDialogFragmentProvider
 
-abstract class BaseActivity<B : ViewDataBinding>(
+internal abstract class BaseActivity<B : ViewDataBinding>(
     private val inflater: (LayoutInflater) -> B
 ) : AppCompatActivity() {
     protected lateinit var binding: B

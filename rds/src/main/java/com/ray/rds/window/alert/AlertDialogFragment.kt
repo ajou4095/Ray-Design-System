@@ -2,9 +2,9 @@ package com.ray.rds.window.alert
 
 import android.content.DialogInterface
 import androidx.fragment.app.viewModels
-import com.ray.rds.common.eventObserve
+import com.ray.rds.common.util.eventObserve
 import com.ray.rds.databinding.DialogAlertBinding
-import com.ray.rds.window.base.BaseDialogFragment
+import com.ray.rds.common.base.BaseDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.ray.rds.sample.ui.common.base
+package com.ray.rds.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ray.rds.window.loading.LoadingDialogFragmentProvider
 
-abstract class BaseBottomSheet<B : ViewDataBinding>(
+internal abstract class BaseBottomSheet<B : ViewDataBinding>(
     private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
 ) : BottomSheetDialogFragment() {
     private var _binding: B? = null

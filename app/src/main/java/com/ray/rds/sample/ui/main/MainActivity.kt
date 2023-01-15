@@ -3,9 +3,9 @@ package com.ray.rds.sample.ui.main
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.viewModelScope
-import com.ray.rds.common.eventObserve
 import com.ray.rds.sample.databinding.ActivityMainBinding
 import com.ray.rds.sample.ui.common.base.BaseActivity
+import com.ray.rds.sample.ui.common.util.eventObserve
 import com.ray.rds.window.alert.AlertDialogFragmentProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -41,7 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                         }
                         delay(1000)
                         withContext(Dispatchers.Main) {
-                            hideDialog()
+                            hideLoading()
                             AlertDialogFragmentProvider.makeAlertDialog(
                                 title = "Internal Server Error",
                                 message = "404 has been occurred"

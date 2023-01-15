@@ -67,7 +67,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         }
     }
 
-    protected fun hideDialog() {
+    protected fun hideLoading() {
         if (
             this@BaseFragment.activity?.isFinishing == false
             && this@BaseFragment.activity?.isDestroyed == false
