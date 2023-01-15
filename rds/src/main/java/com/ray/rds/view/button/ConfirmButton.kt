@@ -18,7 +18,7 @@ import com.ray.rds.view.util.getString
 class ConfirmButton @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = R.attr.confirmButtonStyle
 ) : CardView(context, attributeSet, defStyle) {
     private val binding = ViewConfirmButtonBinding.inflate(LayoutInflater.from(context), this, true)
 
@@ -50,7 +50,7 @@ class ConfirmButton @JvmOverloads constructor(
         }
 
     init {
-        context.obtainStyledAttributes(attributeSet, R.styleable.ConfirmButton).use { attributes ->
+        context.obtainStyledAttributes(attributeSet, R.styleable.ConfirmButton, defStyle, 0).use { attributes ->
             attributes.getString(R.styleable.ConfirmButton_android_text) { text ->
                 this.text = text
             }

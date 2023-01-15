@@ -34,6 +34,7 @@
         <item name="typographyBody2">@style/Typography.TextAppearance.Body2</item>
 
         <item name="android:includeFontPadding">false</item>
+        <item name="confirmButtonStyle">@style/Typography.ConfirmButton</item>
     </style>
 
     <!-- TextAppearance -->

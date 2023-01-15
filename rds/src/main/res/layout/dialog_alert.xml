@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_xs"
-        android:theme="@style/Typography">
+        tools:theme="@style/Typography">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"

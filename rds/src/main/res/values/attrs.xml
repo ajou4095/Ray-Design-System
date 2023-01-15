@@ -22,6 +22,7 @@
         <enum name="blue_gray" value="18" />
     </attr>
 
+    <attr name="confirmButtonStyle" format="reference" />
     <declare-styleable name="ConfirmButton">
         <attr name="android:text" />
         <attr name="mainColorType" />

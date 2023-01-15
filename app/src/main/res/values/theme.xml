@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.Sample" parent="Typography">
+        <item name="confirmButtonStyle">@style/Theme.Sample.ConfirmButton</item>
+    </style>
+
+    <style name="Theme.Sample.ConfirmButton" parent="Typography.ConfirmButton">
         <item name="mainColorType">blue</item>
     </style>
 </resources>

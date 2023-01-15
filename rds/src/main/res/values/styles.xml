@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- region View -->
-
+    <style name="Typography.ConfirmButton" parent="" />
     <!-- endregion View -->
 
     <!-- region Window -->
