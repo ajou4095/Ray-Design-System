@@ -78,6 +78,7 @@ dependencies {
     implementation(libs.shimmer)
 
     implementation(libs.timber)
+    // TODO : Firebase Crashlytics 추가 - jitpack.io google-services.json System.getEnv
 }
 
 fun getLocalProperty(propertyKey: String): String {
