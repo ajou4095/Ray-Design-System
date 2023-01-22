@@ -1,12 +1,15 @@
 package com.ray.rds.sample.ui.main
 
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.lifecycle.viewModelScope
+import com.ray.rds.R
 import com.ray.rds.sample.databinding.ActivityMainBinding
 import com.ray.rds.sample.ui.common.base.BaseActivity
 import com.ray.rds.sample.ui.common.util.eventObserve
 import com.ray.rds.window.alert.AlertDialogFragmentProvider
+import com.ray.rds.window.snackbar.MessageSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -35,19 +38,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         viewModel.state.eventObserve(this@MainActivity) { state ->
             when (state) {
                 MainViewState.Confirm -> {
-                    viewModel.viewModelScope.launch {
-                        withContext(Dispatchers.Main) {
-                            showLoading()
+                    MessageSnackBar.make(
+                        parent = binding.root as ViewGroup,
+                        anchorView = binding.confirm,
+                        message = "asdf",
+                        iconRes = R.drawable.ic_arrow_right,
+                        buttonText = "Button",
+                        listener = {
+                            viewModel.viewModelScope.launch {
+                                withContext(Dispatchers.Main) {
+                                    showLoading()
+                                }
+                                delay(1000)
+                                withContext(Dispatchers.Main) {
+                                    hideLoading()
+                                    AlertDialogFragmentProvider.makeAlertDialog(
+                                        title = "Internal Server Error",
+                                        message = "404 has been occurred"
+                                    ).show()
+                                }
+                            }
                         }
-                        delay(1000)
-                        withContext(Dispatchers.Main) {
-                            hideLoading()
-                            AlertDialogFragmentProvider.makeAlertDialog(
-                                title = "Internal Server Error",
-                                message = "404 has been occurred"
-                            ).show()
-                        }
-                    }
+                    ).show()
                 }
             }
         }

@@ -8,7 +8,6 @@
         <variable
             name="vm"
             type="com.ray.rds.sample.ui.main.MainViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,21 +26,21 @@
             app:onItemClick="@{(position)->vm.onSegmentControlClick(position)}"
             app:position="@={vm.segmentPosition}"
             app:segments="@{vm.segments}"
-            tools:segments="@array/segment_control_items"
-            tools:position="1" />
+            tools:position="1"
+            tools:segments="@array/segment_control_items" />
 
         <com.ray.rds.view.button.ConfirmButton
+            android:id="@+id/confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_m"
+            android:onClick="@{() -> vm.onConfirm()}"
             android:text="Hello World!"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:loading="@{vm.isLoading}"
-            app:onIntervalClick="@{() -> vm.onConfirm()}"
             app:priority="main"
             tools:loading="true" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
