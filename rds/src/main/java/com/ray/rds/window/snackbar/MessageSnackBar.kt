@@ -3,6 +3,7 @@ package com.ray.rds.window.snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import androidx.annotation.DrawableRes
 import androidx.core.view.children
 import androidx.core.view.isVisible
@@ -30,10 +31,10 @@ class MessageSnackBar private constructor(
         if (parent.children.find { it == binding.root } == null) {
             parent.addView(binding.root)
         }
-        animateAppear()
+        animateShowAndHide()
     }
 
-    private fun animateAppear() {
+    private fun animateShowAndHide() {
         binding.root.measure(
             View.MeasureSpec.makeMeasureSpec(
                 getDisplayWidth() - binding.root.marginStart.orZero() - binding.root.marginEnd.orZero(),
@@ -85,6 +86,13 @@ class MessageSnackBar private constructor(
                 with(binding) {
                     button.setOnClickListener {
                         listener?.invoke()
+                        root.clearAnimation()
+                        root.animate()
+                            .setInterpolator(DecelerateInterpolator())
+                            .setDuration(button.context.resources.getLong(R.integer.animation_duration))
+                            .y(getDisplayHeight().toFloat())
+                            .withEndAction { parent.removeView(binding.root) }
+                            .start()
                     }
                     button.isVisible = listener != null && !buttonText.isNullOrEmpty()
                     icon.isVisible = iconRes != null
