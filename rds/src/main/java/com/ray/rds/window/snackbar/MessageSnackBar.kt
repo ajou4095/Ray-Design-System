@@ -3,7 +3,6 @@ package com.ray.rds.window.snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.DecelerateInterpolator
 import androidx.annotation.DrawableRes
 import androidx.core.view.children
 import androidx.core.view.isVisible
@@ -11,27 +10,30 @@ import androidx.core.view.marginBottom
 import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.databinding.DataBindingUtil
-import com.ray.rds.R
+import com.ray.rds.UiCommonContract
 import com.ray.rds.common.util.orZero
 import com.ray.rds.databinding.ViewMessageSnackBarBinding
 import com.ray.rds.util.getDisplayHeight
 import com.ray.rds.util.getDisplayWidth
-import com.ray.rds.util.getLong
 
 class MessageSnackBar private constructor(
     private val parent: ViewGroup,
     private val binding: ViewMessageSnackBarBinding,
     private val anchorView: View? = null
 ) {
-    private val decelerateDuration: Long = binding.root.context.resources.getLong(R.integer.animation_duration)
-    private val delayDuration: Long = 2000L
-    private val accelerateDuration: Long = binding.root.context.resources.getLong(R.integer.animation_duration)
 
     fun show() {
         if (parent.children.find { it == binding.root } == null) {
             parent.addView(binding.root)
         }
         animateShowAndHide()
+    }
+
+    private fun setOnButtonClickListener(onClick: (() -> Unit)?) {
+        binding.button.setOnClickListener {
+            onClick?.invoke()
+            animateShowAndHide()
+        }
     }
 
     private fun animateShowAndHide() {
@@ -56,17 +58,29 @@ class MessageSnackBar private constructor(
         val destinationY: Float = (destinationBottom - binding.root.marginBottom.orZero() - binding.root.measuredHeight).toFloat()
         binding.root.y = getDisplayHeight().toFloat()
         binding.root.clearAnimation()
+
+        val delayDuration = if (binding.button.isVisible) {
+            DURATION_DELAY_WITH_BUTTON
+        } else {
+            DURATION_DELAY_WITHOUT_BUTTON
+        }
+
         binding.root.animate()
             .setInterpolator(
-                MessageSnackBarInterpolator(decelerateDuration, delayDuration, accelerateDuration)
+                MessageSnackBarInterpolator(DURATION_APPEAR, delayDuration, DURATION_DISAPPEAR)
             )
-            .setDuration(delayDuration + decelerateDuration + accelerateDuration)
+            .setDuration(DURATION_APPEAR + delayDuration + DURATION_DISAPPEAR)
             .y(destinationY)
             .withEndAction { parent.removeView(binding.root) }
             .start()
     }
 
     companion object {
+        private const val DURATION_APPEAR: Long = UiCommonContract.ANIMATION_DURATION
+        private const val DURATION_DELAY_WITHOUT_BUTTON: Long = 2000L
+        private const val DURATION_DELAY_WITH_BUTTON: Long = 5000L
+        private const val DURATION_DISAPPEAR: Long = UiCommonContract.ANIMATION_DURATION
+
         fun make(
             parent: ViewGroup,
             anchorView: View? = null,
@@ -82,36 +96,24 @@ class MessageSnackBar private constructor(
                 return ViewMessageSnackBarBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             }
 
-            fun initializeBinding(binding: ViewMessageSnackBarBinding) {
-                with(binding) {
-                    button.setOnClickListener {
-                        listener?.invoke()
-                        root.clearAnimation()
-                        root.animate()
-                            .setInterpolator(DecelerateInterpolator())
-                            .setDuration(button.context.resources.getLong(R.integer.animation_duration))
-                            .y(getDisplayHeight().toFloat())
-                            .withEndAction { parent.removeView(binding.root) }
-                            .start()
-                    }
-                    button.isVisible = listener != null && !buttonText.isNullOrEmpty()
-                    icon.isVisible = iconRes != null
-                    if (iconRes != null) {
-                        icon.setImageResource(iconRes)
-                    }
-                    title.text = message
-                    titleButton.text = buttonText
+            fun ViewMessageSnackBarBinding.initialize(): ViewMessageSnackBarBinding {
+                button.isVisible = listener != null && !buttonText.isNullOrEmpty()
+                icon.isVisible = iconRes != null
+                if (iconRes != null) {
+                    icon.setImageResource(iconRes)
                 }
+                title.text = message
+                titleButton.text = buttonText
+                return this
             }
-
-            val binding: ViewMessageSnackBarBinding = getBinding()
-            initializeBinding(binding)
 
             return MessageSnackBar(
                 parent,
-                binding,
+                getBinding().initialize(),
                 anchorView
-            )
+            ).apply {
+                setOnButtonClickListener(listener)
+            }
         }
     }
 }

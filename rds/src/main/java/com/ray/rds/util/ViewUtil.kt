@@ -166,6 +166,7 @@ fun makeColorStateList(vararg colorStateList: Pair<IntArray, Int>) = ColorStateL
     colorStateList.map { it.first }.toTypedArray(),
     colorStateList.map { it.second }.toTypedArray().toIntArray()
 )
+
 /**
  *
  * Safely run some delayed tasks in a view as they will be tied to the lifecycle.
