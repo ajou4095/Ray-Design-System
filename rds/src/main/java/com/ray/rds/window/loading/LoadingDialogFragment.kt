@@ -13,6 +13,7 @@ internal class LoadingDialogFragment : BaseDialogFragment<DialogLoadingBinding>(
 
     override fun initView() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        isCancelable = false
         bind {
             vm = viewModel
             lifecycleOwner = viewLifecycleOwner
