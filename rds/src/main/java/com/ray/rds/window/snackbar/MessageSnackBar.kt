@@ -3,6 +3,7 @@ package com.ray.rds.window.snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
 import androidx.annotation.DrawableRes
 import androidx.core.view.children
 import androidx.core.view.isVisible
@@ -32,7 +33,12 @@ class MessageSnackBar private constructor(
     private fun setOnButtonClickListener(onClick: (() -> Unit)?) {
         binding.button.setOnClickListener {
             onClick?.invoke()
-            animateShowAndHide()
+            binding.root.animate()
+                .setInterpolator(AccelerateInterpolator())
+                .setDuration(DURATION_DISAPPEAR)
+                .y(getDisplayHeight().toFloat())
+                .withEndAction { parent.removeView(binding.root) }
+                .start()
         }
     }
 
