@@ -1,5 +1,10 @@
 # Change Log
 
+v 0.3.0
+------
+
+* MessageSnackBar 추가
+
 v 0.2.1
 ------
 

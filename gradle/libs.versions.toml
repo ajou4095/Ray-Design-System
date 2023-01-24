@@ -2,7 +2,8 @@
 [versions]
 # App Version
 app-versioncode = "1"
-app-versionname = "0.2.1"
+# 버전 정책 : Main.Feature.Bug 로 배포합니다.
+app-versionname = "0.2.2"
 # SDK Version
 sdk-min = "23"
 sdk-target = "33"
