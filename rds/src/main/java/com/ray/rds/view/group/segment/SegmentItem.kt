@@ -2,12 +2,11 @@ package com.ray.rds.view.group.segment
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.View
-import com.ray.rds.ColorType
 import com.ray.rds.R
+import com.ray.rds.common.color.ColorType
 import com.ray.rds.common.util.orZero
 import com.ray.rds.util.dp
 
@@ -16,6 +15,8 @@ internal class SegmentItem @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : View(context, attributeSet, defStyle) {
+    private val grayColorSet = ColorType.Gray.getColorSet(context)
+
     var segmentCount: Int? = null
         set(value) {
             field = value
@@ -24,9 +25,9 @@ internal class SegmentItem @JvmOverloads constructor(
 
     init {
         background = GradientDrawable().apply {
-            color = ColorStateList.valueOf(Color.WHITE)
+            color = ColorStateList.valueOf(grayColorSet.bg100)
             cornerRadius = resources.getDimension(R.dimen.radius_small)
-            setStroke(1.dp.toInt(), ColorType.Gray.colorSet.variant200)
+            setStroke(1.dp.toInt(), grayColorSet.bg400)
         }
 //        cardElevation = 0.dp
 //        radius = resources.getDimension(R.dimen.radius_small)

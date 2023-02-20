@@ -7,8 +7,10 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
-import com.ray.rds.ColorType
 import com.ray.rds.R
+import com.ray.rds.common.color.ColorSet
+import com.ray.rds.common.color.ColorType
+import com.ray.rds.common.color.getMainColorType
 import com.ray.rds.databinding.ViewConfirmButtonBinding
 import com.ray.rds.util.dp
 import com.ray.rds.util.getBoolean
@@ -29,7 +31,7 @@ class ConfirmButton @JvmOverloads constructor(
             binding.content.text = field
         }
 
-    var mainColorType: ColorType? = null
+    var colorSet: ColorSet? = null
         set(value) {
             field = value
             refreshColor()
@@ -54,8 +56,8 @@ class ConfirmButton @JvmOverloads constructor(
             attributes.getString(R.styleable.ConfirmButton_android_text) { text ->
                 this.text = text
             }
-            attributes.getInteger(R.styleable.ConfirmButton_mainColorType) { index ->
-                this.mainColorType = ColorType.getColorTypeByIndex(index)
+            attributes.getMainColorType(R.styleable.ConfirmButton_mainColorType) { mainColorType ->
+                this.colorSet = mainColorType.getColorSet(context)
             }
             attributes.getInteger(R.styleable.ConfirmButton_priority) { index ->
                 this.priority = ConfirmButtonPriority.getPriorityByIndex(index)
@@ -71,7 +73,7 @@ class ConfirmButton @JvmOverloads constructor(
     }
 
     private fun refreshColor() {
-        val mainColorType = mainColorType ?: return
+        val colorSet = colorSet ?: return
         val priority = priority ?: return
 
         when (priority) {
@@ -82,8 +84,8 @@ class ConfirmButton @JvmOverloads constructor(
                 )
 
                 val colors = intArrayOf(
-                    mainColorType.colorSet.variant700,
-                    mainColorType.colorSet.variant300
+                    colorSet.bg700,
+                    colorSet.bg300
                 )
 
                 setCardBackgroundColor(ColorStateList(states, colors))
@@ -98,13 +100,15 @@ class ConfirmButton @JvmOverloads constructor(
                 )
 
                 val colors = intArrayOf(
-                    mainColorType.colorSet.variant100,
-                    mainColorType.colorSet.variant50
+                    colorSet.bg200,
+                    colorSet.bg100
                 )
 
                 setCardBackgroundColor(ColorStateList(states, colors))
-                binding.content.setTextColor(mainColorType.colorSet.variant900)
-                binding.loading.indeterminateTintList = ColorStateList.valueOf(ColorType.Gray.colorSet.variant400)
+                binding.content.setTextColor(colorSet.fg900)
+                binding.loading.indeterminateTintList = ColorStateList.valueOf(
+                    ColorType.Gray.getColorSet(context).fg400
+                )
             }
         }
     }

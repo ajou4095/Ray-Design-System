@@ -30,7 +30,7 @@
                 android:layout_width="@dimen/size_icon"
                 android:layout_height="@dimen/size_icon"
                 android:indeterminate="true"
-                android:indeterminateTint="@color/gray_700"
+                android:indeterminateTint="@color/fg_gray_700"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

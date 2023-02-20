@@ -15,12 +15,13 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.databinding.InverseBindingMethod
 import androidx.databinding.InverseBindingMethods
-import com.ray.rds.ColorType
 import com.ray.rds.OnItemClickListener
 import com.ray.rds.R
+import com.ray.rds.common.color.ColorType
 import com.ray.rds.common.util.orZero
 import com.ray.rds.databinding.ViewSegmentChildBinding
 import com.ray.rds.databinding.ViewSegmentGroupBinding
+import com.ray.rds.util.dp
 import com.ray.rds.util.getLong
 import com.ray.rds.util.getResourceId
 import com.ray.rds.util.makeColorStateList
@@ -47,6 +48,8 @@ class SegmentControl @JvmOverloads constructor(
     defStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyle) {
     private val binding = ViewSegmentGroupBinding.inflate(LayoutInflater.from(context), this, true)
+
+    private val grayColorSet = ColorType.Gray.getColorSet(context)
 
     var segments: List<String>? = null
         set(value) {
@@ -81,7 +84,8 @@ class SegmentControl @JvmOverloads constructor(
             this.position = attributes.getInteger(R.styleable.SegmentControl_position, 0)
         }
         background = GradientDrawable().apply {
-            color = ColorStateList.valueOf(ColorType.Gray.colorSet.variant100)
+            color = ColorStateList.valueOf(grayColorSet.bg200)
+            setStroke(1.dp.toInt(), grayColorSet.bg400)
             cornerRadius = resources.getDimension(R.dimen.radius_main)
         }
     }
@@ -102,8 +106,8 @@ class SegmentControl @JvmOverloads constructor(
             childBinding.text.text = segment
             childBinding.text.setTextColor(
                 makeColorStateList(
-                    intArrayOf(-android.R.attr.state_selected) to ColorType.Gray.colorSet.variant400,
-                    intArrayOf(android.R.attr.state_selected) to ColorType.Gray.colorSet.variant900,
+                    intArrayOf(-android.R.attr.state_selected) to grayColorSet.fg400,
+                    intArrayOf(android.R.attr.state_selected) to grayColorSet.fg900,
                 )
             )
         }

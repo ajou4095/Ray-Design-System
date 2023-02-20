@@ -4,22 +4,14 @@
         <enum name="red" value="0" />
         <enum name="pink" value="1" />
         <enum name="purple" value="2" />
-        <enum name="deep_purple" value="3" />
-        <enum name="indigo" value="4" />
-        <enum name="blue" value="5" />
-        <enum name="light_blue" value="6" />
-        <enum name="cyan" value="7" />
-        <enum name="teal" value="8" />
-        <enum name="green" value="9" />
-        <enum name="light_green" value="10" />
-        <enum name="lime" value="11" />
-        <enum name="yellow" value="12" />
-        <enum name="amber" value="13" />
-        <enum name="orange" value="14" />
-        <enum name="deep_orange" value="15" />
-        <enum name="brown" value="16" />
-        <enum name="gray" value="17" />
-        <enum name="blue_gray" value="18" />
+        <enum name="blue" value="3" />
+        <enum name="cyan" value="4" />
+        <enum name="green" value="5" />
+        <enum name="yellow" value="6" />
+        <enum name="orange" value="7" />
+        <enum name="brown" value="8" />
+        <enum name="blue_gray" value="9" />
+        <enum name="gray" value="10" />
     </attr>
 
     <attr name="confirmButtonStyle" format="reference" />
