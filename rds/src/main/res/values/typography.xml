@@ -44,15 +44,15 @@
     </style>
 
     <style name="Typography.TextAppearance.Light">
-        <item name="android:fontFamily">@font/notosans_light</item>
+        <item name="android:fontFamily">@font/pretendard_light</item>
     </style>
 
     <style name="Typography.TextAppearance.Regular">
-        <item name="android:fontFamily">@font/notosans_regular</item>
+        <item name="android:fontFamily">@font/pretendard_regular</item>
     </style>
 
     <style name="Typography.TextAppearance.Medium">
-        <item name="android:fontFamily">@font/notosans_medium</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
     </style>
 
     <style name="Typography.TextAppearance.Headline1" parent="Typography.TextAppearance.Light">
